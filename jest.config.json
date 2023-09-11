@@ -1,0 +1,4 @@
+{
+  "setupFilesAfterEnv": ["react-native-accessibility-engine"],
+  "preset": "react-native"
+}

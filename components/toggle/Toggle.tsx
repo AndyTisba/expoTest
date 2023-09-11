@@ -6,15 +6,13 @@ export const Toggle = () => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   return (
-    <View style={styles.container}>
-      <Switch
-        trackColor={{ false: '#E7E7E7', true: '#ADCCB7' }}
-        thumbColor={'#FFFFFF'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
-    </View>
+    <Switch
+      trackColor={{ false: '#E7E7E7', true: '#ADCCB7' }}
+      thumbColor={'#FFFFFF'}
+      ios_backgroundColor="#3e3e3e"
+      onValueChange={toggleSwitch}
+      value={isEnabled}
+    />
   );
 };
 
