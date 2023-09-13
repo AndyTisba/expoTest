@@ -1,26 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<RCTSwitch
+<View
   accessibilityRole="switch"
-  onChange={[Function]}
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  onTintColor="#ADCCB7"
+  role="switch"
   style={
     [
       {
+        "backgroundColor": "black",
+        "borderRadius": 100,
+        "elevation": 3,
         "height": 31,
+        "padding": 2,
+        "position": "relative",
         "width": 51,
       },
       {
-        "backgroundColor": "#3e3e3e",
-        "borderRadius": 16,
+        "backgroundColor": "#ADCCB7",
       },
     ]
   }
-  thumbTintColor="#FFFFFF"
-  tintColor="#E7E7E7"
-  value={false}
-/>
+>
+  <View
+    collapsable={false}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 100,
+        "boxShadow": "0px 3px 1px 0px #0000000F",
+        "height": 27,
+        "justifyContent": "center",
+        "top": 0,
+        "transform": [
+          {
+            "translateX": 0,
+          },
+        ],
+        "width": 27,
+      }
+    }
+  >
+    <Image
+      alt="on"
+      source={
+        {
+          "testUri": "../../../assets/check.png",
+        }
+      }
+    />
+  </View>
+</View>
 `;

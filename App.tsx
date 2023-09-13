@@ -1,13 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, Switch } from 'react-native';
 import { Toggle } from './components/toggle/Toggle';
+import { useState } from 'react';
 
 export default function App() {
+  const [isEnabled, setIsEnabled] = useState(false);
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>{String(isEnabled)}</Text>
       <StatusBar style="auto" />
-      <Toggle />
+      <Switch></Switch>
+      <Toggle isEnabled={isEnabled} setIsEnabled={setIsEnabled} />
     </View>
   );
 }
