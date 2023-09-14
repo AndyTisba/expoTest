@@ -1,29 +1,65 @@
-import React, { useRef } from 'react';
-import { Text, StyleSheet, Pressable, Image, Animated } from 'react-native';
+import React, { useRef, SetStateAction, Dispatch, RefObject } from 'react';
+import { StyleSheet, Pressable, Image, Animated, PressableProps, View } from 'react-native';
 import Check from '../../assets/check.png';
 import Cross from '../../assets/cross.png';
 
-export const Toggle = ({ isEnabled, setIsEnabled }) => {
+// import { usePress } from '../../utils/usePress';
+// import { useSwitch } from '../../utils/useSwitch';
+// import { useToggleState } from '../../utils/useToggleState';
+
+const useAnim = (useRef, initialValue: number = 0, duration: number = 250) => {
+  const ref = useRef(new Animated.Value(initialValue)).current;
+  return {
+    ref,
+    anim: (toValue) => {
+      Animated.timing(ref, {
+        toValue,
+        duration,
+        useNativeDriver: true,
+      }).start();
+    },
+  };
+};
+
+type ToggleProps = {
+  setIsOn: Dispatch<SetStateAction<boolean>>;
+  isOn?: boolean;
+  isDisabled?: boolean;
+};
+
+const TRANSLATE_X_POSITION = 20;
+export const Toggle = ({ setIsOn, isOn = false, isDisabled = false }: ToggleProps) => {
+  const toggleRef =
+    useRef<React.ForwardRefExoticComponent<PressableProps & React.RefAttributes<View>>>(null);
+  const initialIsOnPosition = isOn ? TRANSLATE_X_POSITION : 0;
+  const { ref: translate, anim: move } = useAnim(useRef, initialIsOnPosition);
+
   const toggleSwitch = () =>
-    setIsEnabled((previousState) => {
-      previousState ? move(0) : move(20);
+    setIsOn((previousState) => {
+      move(previousState ? 0 : TRANSLATE_X_POSITION);
       return !previousState;
     });
 
-  const translate = useRef(new Animated.Value(0)).current;
-  const move = (toValue) => {
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(translate, {
-      toValue,
-      duration: 250,
-      useNativeDriver: true,
-    }).start();
-  };
+  // const state = useToggleState();
+  // const { isFocusVisible, focusProps } = useFocusRing();
+  // let { pressProps } = usePress({
+  //   isDisabled,
+  //   onPress: toggleSwitch,
+  // });
 
-  const imageProps = { source: isEnabled ? Check : Cross, alt: isEnabled ? 'on' : 'off' };
+  // const toggleProps = useSwitch(
+  //   {
+  //     role: 'switch',
+  //     accessibilityRole: 'switch',
+  //   },
+  //   isOn,
+  //   toggleRef
+  // );
+  const imageProps = { source: isOn ? Check : Cross, alt: isOn ? 'on' : 'off' };
+
   return (
     <Pressable
-      style={[styles.toggle, isEnabled ? styles.toggleEnabled : styles.toggleDisabled]}
+      style={[styles.toggle, isOn ? styles.toggleEnabled : styles.toggleDisabled]}
       onPress={toggleSwitch}
       role="switch"
       accessibilityRole="switch">
@@ -33,10 +69,7 @@ export const Toggle = ({ isEnabled, setIsEnabled }) => {
           {
             transform: [
               {
-                translateX: translate.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 1], // 0 : 150, 0.5 : 75, 1 : 0
-                }),
+                translateX: translate,
               },
             ],
           },

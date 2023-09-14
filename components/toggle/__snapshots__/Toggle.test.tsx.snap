@@ -45,7 +45,7 @@ exports[`renders correctly 1`] = `
         "width": 51,
       },
       {
-        "backgroundColor": "#ADCCB7",
+        "backgroundColor": "#E7E7E7",
       },
     ]
   }
@@ -71,10 +71,10 @@ exports[`renders correctly 1`] = `
     }
   >
     <Image
-      alt="on"
+      alt="off"
       source={
         {
-          "testUri": "../../../assets/check.png",
+          "testUri": "../../../assets/cross.png",
         }
       }
     />
